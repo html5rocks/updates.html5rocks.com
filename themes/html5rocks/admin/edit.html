@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block title %}{% if form.instance %}Edit{% else %}New{% endif %} Post{% endblock %}
+{% block body %}
+  <form method="post" action="">
+    <table>
+      <h2>{% if form.instance %}Edit{% else %}New{% endif %} Post</h2>
+      {{form}}
+      <tr><td>&nbsp;</td><td><input id="submit" type="submit" value="Submit post" /></td></tr>
+    </table>
+  </form>
+  <h3>Please use Textile markup (<a
+    href="http://en.wikipedia.org/wiki/Textile_(markup_language)">reference</a>)</h3>
+    <ul>
+      <li>New paragraph: <span class="textile">Just leave an empty line.</span></li>
+      <li>Links: <span class="textile">"the Google search
+        engine":http://google.com</span></li>
+      <li>A little code: <span class="textile">@alert("just some
+        code")@</span></li>
+      <li>A lot of code: <span class="textile">Resort to HTML</span>:
+<pre>
+&lt;pre&gt;&lt;code&gt;for (i=0; i<10; i++) {
+  console.log(i);
+}
+&lt;/code&gt;&lt;/pre&gt;</pre>
+    </ul>
+
+  <h3>Limitations</h3>
+
+  <p>(aka opportunities for this customisation of Bloggart to be improved.)</p>
+
+  <ul>
+      <li><p>External images URLs are downloaded and stored locally,
+      so no worries about bandwidth theft. In the event you want to customise
+      an image's style, just include the image normally, which will cause it to
+      download, and then preview the post, which will let you see the image's
+      new URL, and you can then link to this one.</p>
+      <p>For now, a new image is downloaded each time you update the post.</p>
+      <p>For now, if you specify a bad image URL, the form will silently return.</p>
+      <li>Tags are separated by newlines. (That's how Bloggart does it for
+      now.)</li>
+  </ul>
+
+{% endblock %}

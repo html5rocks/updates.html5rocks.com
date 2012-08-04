@@ -1,0 +1,47 @@
+application: updaterocker
+version: v20120411
+runtime: python
+api_version: 1
+
+skip_files: |
+ ^(.*/)?(
+ (app\.yaml)|
+ (app\.yml)|
+ (index\.yaml)|
+ (index\.yml)|
+ (#.*#)|
+ (.*~)|
+ (.*\.py[co])|
+ )$
+
+builtins:
+- remote_api: on
+
+
+handlers:
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
+
+- url: /_ah/queue/deferred
+  script: deferred.py
+  login: admin
+
+- url: /admin2/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+
+- url: /admin/.*
+  script: admin.py
+  login: admin
+
+- url: /static/([^/]+)/(.*)
+  static_files: themes/\1/static/\2
+  upload: themes/[^/]+/static/.*
+
+- url: /images/(.*)
+  script: images.py
+
+- url: /.*
+  script: static.py
+

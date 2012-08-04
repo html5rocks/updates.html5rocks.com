@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block headtitle %}{% trans "Search Results" %}{% endblock %}
+
+{% block head %}
+<style>
+#cse-search-results {
+  margin-top: 0.5em;
+}
+#cse-search-results iframe {
+  width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="cse-search-results"></div>
+<script type="text/javascript">
+  var googleSearchIframeName = "cse-search-results";
+  var googleSearchFormName = "cse-search-box";
+  var googleSearchFrameWidth = 750;
+  var googleSearchDomain = "www.google.com";
+  var googleSearchPath = "/cse";
+</script>
+<script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+{% endblock %}
+

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{config.blog_name}}{% endblock %}
+{% block body %}
+  {% for post in posts %}
+    <h2><a href="{{config.url_prefix}}{{post.path}}">{{post.title|escape}}</a></h2>
+    <p class="post-info">
+      Posted by {{config.author_name}}
+      {% if post.tags %}
+        | Filed under
+        {% for tag in post.tag_pairs %}
+          <a href="{{config.url_prefix}}/tag/{{tag.1|escape}}">{{tag.0|escape}}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
+    </p>
+    {{post.summary}}
+    <p class="postmeta">
+      <a href="{{config.url_prefix}}{{post.path}}" class="readmore">Read more</a> |
+      {% if config.disqus_forum %}
+        <a href="{{config.url_prefix}}{{post.path}}#disqus_thread" class="readmore">Comments</a> |
+      {% endif %}
+      <span class="date">{{post.published_tz|date:config.date_format}}</span>
+    </p>
+  {% endfor %}
+  {% if prev_page %}
+    <a id="prev" href="{{config.url_prefix}}{{prev_page}}">Newer</a>
+  {% endif %}
+  {% if next_page %}
+    <a id="next" href="{{config.url_prefix}}{{next_page}}">Older</a>
+  {% endif %}
+  {% if config.disqus_forum %}
+    <script type="text/javascript">
+    //<![CDATA[
+    (function() {
+      var links = document.getElementsByTagName('a');
+      var query = '?';
+      for(var i = 0; i < links.length; i++) {
+      if(links[i].href.indexOf('#disqus_thread') >= 0) {
+        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+      }
+      }
+      document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/{{config.disqus_forum}}/get_num_replies.js' + query + '"></' + 'script>');
+    })();
+    //]]>
+    </script>
+  {% endif %}
+{% endblock %}

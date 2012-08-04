@@ -1,0 +1,40 @@
+/**********************************************************************/
+/* ::::HTML5Rocks Updates Stream - Overrides::::
+ * In here are customisations for Bloggart and overrides of the
+ * default HTML5Rocks stylesheet
+ ****************************************/
+/*********/
+/* ADMIN */
+/*********/
+form table input, form table textarea { width: 40em; }
+form table th { text-align: right; vertical-align: top; padding-right: 5px; }
+form table th label { font-weight: normal; }
+#submit { width: auto; }
+/* mandatory */
+[for=name], [for=message], [for=id_tags], [for=id_author_id] { font-weight: bold; }
+[for="id_tags"]:after {
+	content: "\A(one per line)"; font-weight: normal;
+}
+
+
+
+ul.errorlist { list-style-type: none; margin-top: 1em; color: red; margin: 0; padding: 0; }
+.textile { font-style: italic; }
+
+/********/
+/* POST */
+/********/
+.post-info { float: right;  }
+.postheader { margin-bottom: 0em; }
+.postmeta, .postfooter { clear: both; margin-top: 1em; }
+.postimage { display: block; max-width: 100%; }
+.left { float: left; margin: 0 1em 1em 0; }
+.right { float: right; margin: 0 0 1em 1em; }
+.top { display: block; margin-bottom: 1em; }
+.time-author { margin-bottom: 10px; color: hsl(0, 0%, 45%); font-style: italic; }
+.time-author time { float: none; font-size: 100%; }
+.time-author a, .time-author a:visited { color: hsl(0, 0%, 19%); text-decoration: underline; }
+.tag { color: hsl(240, 20%, 62%); margin-left: 10px;}
+
+.prevnext { border-top: 3px double hsl(0, 0%, 80%); text-align: center; }
+.prevnext a { padding: 0 15px; }

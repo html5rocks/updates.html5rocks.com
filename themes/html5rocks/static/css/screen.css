@@ -1,0 +1,39 @@
+#subtitle {
+  font-size: 25px;
+  float: left;
+  position: relative;
+  left: 15px;
+  font-family: 'Reenie Beanie', arial, helvetica, sans-serif;
+  margin: 0;
+  -webkit-transform: rotateZ(-15deg);
+  -moz-transform: rotateZ(-15deg);
+  -ms-transform: rotateZ(-15deg);
+  -o-transform: rotateZ(-15deg);
+  transform: rotateZ(-15deg);
+  letter-spacing: -1px;
+}
+#subtitle a { color: red; }
+
+/************************/
+/* HTML5Rocks overrides */
+/************************/
+.postmeta { border: 1px solid #ddd; padding: 10px; }
+.date { float: right; }
+footer { margin-top: 20px; }
+.tag { color: #696; text-decoration: underline; }
+h2 { margin: 20px 0 10px; }
+
+<<<<<<< local
+=======
+/********/
+/* POST */
+/********/
+form table input, form table textarea { width: 40em; }
+form table th { text-align: right; vertical-align: top; padding-right: 5px; }
+form table th label { font-weight: normal; }
+#submit { width: auto; }
+#id_tags { height: 1em; }
+.postimage { display: block; width: 400px; margin-bottom: 1em; }
+ul.errorlist { list-style-type: none; margin-top: 1em; color: red; margin: 0; padding: 0; }
+.textile { font-style: italic; }
+>>>>>>> other
