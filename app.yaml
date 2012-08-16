@@ -1,7 +1,15 @@
 application: updaterocker
-version: v20120411
+version: v20120816
 runtime: python
 api_version: 1
+
+pagespeed:
+  enabled_rewriters:
+  - MinifyCss
+  - InlineImages
+  - CollapseWhitespace
+  - ImageAddDimensions
+  - RemoveComments
 
 skip_files: |
  ^(.*/)?(
