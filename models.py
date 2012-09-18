@@ -2,8 +2,8 @@ import aetycoon
 import datetime
 import hashlib
 import logging
-import re
 import common
+import re
 from google.appengine.api import urlfetch
 from google.appengine.ext import db
 from google.appengine.ext import deferred
@@ -14,7 +14,6 @@ from django.utils import simplejson
 import markup
 import static
 import utils
-
 
 if config.default_markup in markup.MARKUP_MAP:
   DEFAULT_MARKUP = config.default_markup
@@ -63,7 +62,6 @@ class BlogPost(db.Model):
 
   @property
   def author_link(self):
-    # 
     if common.PROD:
       url = '%s/api/authors' % (config.main_site_origin)
     else:
