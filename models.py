@@ -87,6 +87,7 @@ class BlogPost(DictModel):
   body_markup = db.StringProperty(choices=set(markup.MARKUP_MAP),
                                   default=DEFAULT_MARKUP)
   body = db.TextProperty(required=True)
+  description = db.TextProperty(required=False, indexed=False)
   image_url = db.StringProperty(required=False, indexed=False) # external
   cached_image_url = db.StringProperty(required=False, indexed=False) # blobstore
   image_id = db.StringProperty(required=False, indexed=False) # blobstore
@@ -113,7 +114,7 @@ class BlogPost(DictModel):
         return '<a href="%s/profiles/#%s">%s</a>' % (config.main_site_origin, self.author_id, self.author_id)
     except urlfetch.DownloadError:
       return '<a href="%s/profiles/#%s">%s</a>' % (config.main_site_origin, self.author_id, self.author_id)
- 
+
   @property
   def published_tz(self):
     return utils.tz_field(self.published)
@@ -233,7 +234,7 @@ class Page(db.Model):
     generators.PageContentGenerator.generate_resource(self, self.path);
 
   def remove(self):
-    if not self.is_saved():   
+    if not self.is_saved():
       return
     self.delete()
     generators.PageContentGenerator.generate_resource(self, self.path, action='delete')

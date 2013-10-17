@@ -35,6 +35,7 @@ class JSONHandler(BaseHandler):
       data.append({
         'title': p.title,
         'author_id': p.author_id,
+        'description': unicode(p.description),
         'updated': unicode(p.updated),
         'published': unicode(p.published),
         'path': p.path,
