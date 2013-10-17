@@ -1,5 +1,5 @@
 application: updaterocker
-version: 20130930
+version: 20131017
 runtime: python
 #threadsafe: false
 api_version: 1
@@ -30,7 +30,7 @@ builtins:
 # #- name: webapp2
 # #  version: "latest"
 # - name: django
-#   version: "1.4" #"latest" 
+#   version: "1.4" #"latest"
 
 # env_variables:
 #   DJANGO_SETTINGS_MODULE: 'config'

@@ -31,6 +31,10 @@ class PostForm(djangoforms.ModelForm):
       'id':'message',
       'rows': 10,
       'cols': 20}))
+  description = forms.CharField(widget=forms.Textarea(attrs={
+      'id':'description',
+      'rows': 3,
+      'cols': 20}))
   body_markup = forms.ChoiceField(
     choices=[(k, v[0]) for k, v in markup.MARKUP_MAP.iteritems()])
   tags = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 20}))
@@ -56,7 +60,7 @@ class PostForm(djangoforms.ModelForm):
   image_style = forms.ChoiceField(required=False, choices=IMAGE_STYLES)
   class Meta:
     model = models.BlogPost
-    fields = [ 'title', 'body', 'tags', 'author_id', 'image_url', 'image_style' ]
+    fields = [ 'title', 'body', 'description', 'tags', 'author_id', 'image_url', 'image_style' ]
 
 def with_post(fun):
   def decorate(self, post_id=None):
@@ -186,7 +190,7 @@ class RegenerateHandler(BaseHandler):
 
 class PageForm(djangoforms.ModelForm):
   path = forms.RegexField(
-    widget=forms.TextInput(attrs={'id':'path'}), 
+    widget=forms.TextInput(attrs={'id':'path'}),
     regex='(/[a-zA-Z0-9/]+)')
   title = forms.CharField(widget=forms.TextInput(attrs={'id':'title'}))
   template = forms.ChoiceField(choices=config.page_templates.items())
@@ -235,13 +239,13 @@ def with_page(fun):
     fun(self, page)
   return decorate
 
-    
+
 class PageHandler(BaseHandler):
   def render_form(self, form):
     self.render_to_response("editpage.html", {'form': form})
 
   @with_page
-  def get(self, page):      
+  def get(self, page):
     self.render_form(PageForm(
         instance=page,
         initial={

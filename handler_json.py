@@ -1,12 +1,10 @@
-import os
-
 from django.utils import simplejson
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 import fix_path
 import models
-import utils
+import datetime
 
 
 class BaseHandler(webapp.RequestHandler):
@@ -32,14 +30,16 @@ class JSONHandler(BaseHandler):
 
     data = []
     for p in posts:
-      data.append({
-        'title': p.title,
-        'author_id': p.author_id,
-        'description': unicode(p.description),
-        'updated': unicode(p.updated),
-        'published': unicode(p.published),
-        'path': p.path,
-        })
+
+      if p.published != datetime.datetime.max:
+        data.append({
+          'title': p.title,
+          'author_id': p.author_id,
+          'description': unicode(p.description),
+          'updated': unicode(p.updated),
+          'published': unicode(p.published),
+          'path': p.path,
+          })
 
     # Add CORS and Chrome Frame to response.
     self.response.headers.add_header('Access-Control-Allow-Origin', '*')
