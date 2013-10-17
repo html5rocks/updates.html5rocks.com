@@ -5,6 +5,7 @@ import logging
 import common
 import re
 from google.appengine.api import urlfetch
+from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import deferred
 
@@ -19,6 +20,42 @@ if config.default_markup in markup.MARKUP_MAP:
   DEFAULT_MARKUP = config.default_markup
 else:
   DEFAULT_MARKUP = 'html'
+
+
+SIMPLE_TYPES = (int, long, float, bool, dict, basestring, list)
+
+class DictModel(db.Model):
+  # def to_dict(self):
+  #   return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
+
+  def to_dict(self):
+    output = {}
+
+    for key, prop in self.properties().iteritems():
+      value = getattr(self, key)
+
+      if value is None or isinstance(value, SIMPLE_TYPES):
+        output[key] = value
+      elif isinstance(value, datetime.date):
+        # Convert date/datetime to ms-since-epoch ("new Date()").
+        #ms = time.mktime(value.utctimetuple())
+        #ms += getattr(value, 'microseconds', 0) / 1000
+        #output[key] = int(ms)
+        output[key] = unicode(value)
+      elif isinstance(value, db.GeoPt):
+        output[key] = {'lat': value.lat, 'lon': value.lon}
+      elif isinstance(value, db.Model):
+        output[key] = to_dict(value)
+      elif isinstance(value, users.User):
+        output[key] = {
+          'nickname': value.nickname(),
+          'email': value.email(),
+        }
+      else:
+        raise ValueError('cannot encode ' + repr(prop))
+
+    return output
+
 
 class BlogDate(db.Model):
   """Contains a list of year-months for published blog posts."""
@@ -42,7 +79,7 @@ class BlogDate(db.Model):
   def date(self):
     return BlogDate.datetime_from_key_name(self.key().name()).date()
 
-class BlogPost(db.Model):
+class BlogPost(DictModel):
 
   # The URL path to the blog post. Posts have a path iff they are published.
   path = db.StringProperty()

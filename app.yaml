@@ -1,6 +1,7 @@
 application: updaterocker
-version: v20120816
+version: 20130930
 runtime: python
+#threadsafe: false
 api_version: 1
 
 pagespeed:
@@ -25,6 +26,14 @@ skip_files: |
 builtins:
 - remote_api: on
 
+# libraries:
+# #- name: webapp2
+# #  version: "latest"
+# - name: django
+#   version: "1.4" #"latest" 
+
+# env_variables:
+#   DJANGO_SETTINGS_MODULE: 'config'
 
 handlers:
 - url: /remote_api
@@ -49,6 +58,9 @@ handlers:
 
 - url: /images/(.*)
   script: images.py
+
+- url: /json$
+  script: handler_json.py
 
 - url: /.*
   script: static.py

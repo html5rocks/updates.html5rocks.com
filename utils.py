@@ -8,6 +8,7 @@ from google.appengine.ext.webapp.template import _swap_settings
 import django.conf
 from django import template
 from django.template import loader
+#from django.template.loader import render_to_string
 
 import config
 
