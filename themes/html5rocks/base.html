@@ -493,9 +493,7 @@
 {% endif %}
 
   <!-- defer is unreliable in ie <= 9, but o well -->
-  <script defer src="{{config.main_site_origin}}/static/js/app{% if prod %}.min{% endif %}.js"></script>
   <script defer src="{{config.main_site_origin}}/static/js/search{% if prod %}.min{% endif %}.js"></script>
-  <!--<script defer src="{{config.main_site_origin}}/static/js/3rdpartyinit{% if prod %}.min{% endif %}.js"></script>-->
 </body>
 </html>
 
