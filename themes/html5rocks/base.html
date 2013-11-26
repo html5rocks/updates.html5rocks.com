@@ -385,12 +385,6 @@
   <script type="text/javascript" src="{{config.url_prefix}}/static/{{config.theme}}/prettify/prettify.js"></script>
   <script>
   (function() {
-    {% if is_mobile %}
-      // Hides mobile browser's address bar when page is done loading.
-      window.addEventListener('load', function(e) {
-        setTimeout(function() { window.scrollTo(0, 1); }, 1);
-      }, false);
-    {% endif %}
 
     $('#features_show a').click(function() {
       $('#search_hide').click(); // Hide search panel if it's out.
